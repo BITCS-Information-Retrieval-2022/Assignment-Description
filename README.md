@@ -7,6 +7,124 @@
   + 含标题、作者、摘要、图表、引文、相关论文等信息
   + [sample here](https://www.semanticscholar.org/paper/Attention-is-All-you-Need-Vaswani-Shazeer/204e3073870fae3d05bcbc2f6a8e263d9b72e776)
 + arXiv: [https://arxiv.org](https://arxiv.org/)
+  + 含标题、作者、摘要、PDF、latex文档等信息。
+  + [sample here](https://arxiv.org/abs/1406.2661)
++ ScienceDirect：[https://www.sciencedirect.com](https://www.sciencedirect.com/)
+  + 含作者、摘要、关键词等论文相关信息
+  + [sample here](https://www.sciencedirect.com/science/article/abs/pii/S0004370221001314)
+#### 要求
+
++ **Semantic Scholar 必选**
++ **arXiv** 和 **ScienceDirect 二选一**
++ **ScienceDirect** 爬虫任务的论文领域要求包含**多领域**的数据
++ 爬到的数据必须存储到 [MongoDB](https://www.mongodb.com) 中，字段定义详见`db_fields.md`
++ 数据源越丰富越好，当从不同数据源爬取到相同论文时，需要**去除重复数据**
++ 从每个数据源获取的数据需要具有**完备性**，即爬取数据量占全站数据量的比例越高越好。
+
++ 要求搭建一个完整的**爬虫框架**，在爬取不同的数据源时，只需要根据实际情况，手写少量解析网页的部分，即数据源是可插拔的。此处推荐 [Python Scrapy爬虫库](https://scrapy.org)
++ 要求实现**增量式**爬取，定时更新
++ 要求爬虫至少采用如下技术手段：
+  + 当爬取一个规模较大的网站时，采用某种策略/顺序，保证爬取结果不重不漏
+  + 使用多线程/多进程等技术提升爬虫效率
+  + 使用ip池、调整等待时间等技术抵御网站反爬
+  + 如果网络崩溃，能够从断点续爬
+  + 使用日志技术实时展示爬取进度
++ 搭建一个基本的 [Elasticsearch](https://www.elastic.co/) + [Kibana](https://www.elastic.co/cn/kibana/) 检索系统，对爬取的数据建立索引，方便展示
+
+
+
+## Project2: 论文标签检索引擎
+
+### 爬虫模块
+
+#### 推荐爬取的站点
++ Paperwithcode: [https://paperswithcode.com](https://paperswithcode.com/)
+
+#### 要求
+
++ 爬取论文所用数据集、论文提及方法等信息
++ 爬到的数据必须存储到 **MongoDB** 中，字段必须定义清晰
+
+### 检索模块
+
+#### 要求
+
++ 从MongoDB中读取数据实现**综合检索**，要求无论是输入`任务名称`、`评价指标`、`论文题目`、`论文方法`、`论文数据集`，都能得到相应的检索结果，如下例所示：
+
+[![xNHo2q.png](https://s1.ax1x.com/2022/10/11/xNHo2q.png)](https://imgse.com/i/xNHo2q)
+
+
++ 可以自己实现搜索算法，也可以使用已有的搜索引擎工具，比如[Elasticsearch](https://www.elastic.co/)
++ 要求展示模块提供`任务名称网络信息`、`评价指标网络信息`、`论文题目网络信息`、`论文方法网络信息`、`论文数据集网络信息`
+
+### 展示模块
+
+#### 要求
+
++ 设计并实现一个论文标签检索引擎网站，包括三个页面：
+
+  + 首页/搜索页
+
+  + 检索结果列表页
+  
+    + 上述五项任务分开展示
+
+    + 可选加分项：
+      + 根据标签网络计算每个标签的重要性分数并展示
+      + 构建`任务名称`、`评价指标`、`论文题目`、`论文方法`、`论文数据集`的**可视化知识图谱**（或者任选其中几项构建知识图谱）    
+      + 其他有创意的趣味展示
+
++ 推荐使用 [Python Django](https://www.djangoproject.com/) 库来实现
+
+
+### 提交内容
+
++ 一个**MongoDB**数据库
++ 在仓库`README`中给出爬取数据的**统计信息**，例如每个数据源爬取的标签数、字段覆盖率等
+
++ 验收时，展示论文标签检索引擎的检索结果
+
+
+
+## Project3: 基于全文信息的论文检索引擎
+
+除对论文的题目摘要等信息进行检索外，对论文全文内容进行深度检索。
+
+### 数据处理模块
++ 在 [Github](https://drive.google.com/file/d/1xC-K6__W3FCalIDBlDROeN4d4xh0IVry/view?usp=sharing) 上下载ACL语料库 (`3.6GB`)，并把xml格式转化成全文文本并储存在数据库中。
+
+### 检索模块
++ 搭建 **Elasticsearch** 实现从某一个或若干字段检索
++ 检索时要求同时考虑 `论文题目`，`摘要`，`论文全文` 等信息，并保证 **检索效率**
++ 能结合 **具体案例** 分析说明满足第二点要求
++ 解释说明全文检索的 **方法原理**
+
+### 展示模块
+
+- 设计并实现一个学术论文搜索引擎网站，包括三个页面
+
+  - 首页/搜索页
+  - 检索结果列表页
+  + 论文详情页面：
+    + 包含论文标题、摘要、参考文献等相关信息
+
+- 展示样例如下图所示：
+  
+[![xNHIGn.png](https://s1.ax1x.com/2022/10/11/xNHIGn.png)](https://imgse.com/i/xNHIGn)
+- 推荐使用 [Python Django](https://www.djangoproject.com/) 库来实现
+
+#### 提交内容
++ 一个**MongoDB**数据库，包含`论文标题`、`摘要`、`全文信息`等重要性字段
++ 展示基于全文信息的论文检索引擎的检索结果，并能 **结合具体案例** 说明全文信息对检索结果的影响以及 **检索效率** 的提升
++ 展示可视化搜索引擎# 作业内容
+
+## Project1: 大规模爬虫
+
+### 爬虫模块
++ Semantic Scholar：[https://www.semanticscholar.org](https://www.semanticscholar.org/)
+  + 含标题、作者、摘要、图表、引文、相关论文等信息
+  + [sample here](https://www.semanticscholar.org/paper/Attention-is-All-you-Need-Vaswani-Shazeer/204e3073870fae3d05bcbc2f6a8e263d9b72e776)
++ arXiv: [https://arxiv.org](https://arxiv.org/)
   + 含标题、作者、摘要、PDF链接、latex文档等信息。
   + [sample here](https://arxiv.org/abs/1406.2661)
 + ScienceDirect：[https://www.sciencedirect.com](https://www.sciencedirect.com/)
@@ -171,18 +289,18 @@
 
 | 队伍编号 |   任务   |         组名         |  组长  |                      组员                      | 验收时间    |
 | :------: | :------: | :------------------: | :----: | :--------------------------------------------: | ----------- |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
-|          |      |      |      |      |          |
+|    1     | Project1 |            | 王朝阳 |        汪俊凯，喻晨曦，吕卓澄，崔文耀，林泽炜        | 8:00-8:30  |
+|    2     | Project1 |                 |  叶语霄  |  张庚辰，梁瑛平，罗潘亚欣，张驰，魏慧聪  | 8:40-9:10   |
+|    9     | Project1 |                 | 于翔 |     赵曰皓，郭思涵，闫羽，彭炜，刘昕飏     | 9:20-9:50   |
+|    12     | Project1 |  |  罗泽宇  |       刘奕凡，吕非浓，耿明灏       | 10:00-10:30 |
+|    5     | Project2 |                  | 牟效仑 |     方胜，刘彬，刘正清，杨东东，杨芊雨     | 10:40-11:10 |
+|    8    | Project2 |             | 任博文 |      王逸洲，缪思语，武益霄，李曼秋，崔文毓      | 11:20-11:50 |
+|    10    | Project2 |           | 王恒烨 |      王嘉宁，周旭鸿，邹怡清，李鸿熙，宁艺凯      | 14:00-14:30 |
+|    11    | Project2 |                | 邱峙清 |       贾星辰，赵亦锐，刘翔宇，沈洪宇，宫业梓       | 14:40-15:10 |
+|    3     | Project3 |                 |  徐正斐  |      米昊天，张成喆，张圃瑒，钱海，杨欣运      | 15:20-15:50 |
+|    4     | Project3 |                | 康行铠 |      张敬铮，晁洋，白宇晗，欧立炜，杨崇盛      | 16:00-16:30 |
+|    6     | Project3 |                 |  柳思涵  |      刘思雯，贾奥，张蔚，桂梦婷，李翰杰      | 16:40-17:10 |
+|    7     | Project3 |                 | 周祐超 | 刘润衡，李云龙，刘进宇，刘冉 | 17:20-17:50 |
 
 + **时间**：2022/12/18日（周日），上午8:00-12:00，下午14:00-18:00
 
