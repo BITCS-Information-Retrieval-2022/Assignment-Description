@@ -136,7 +136,7 @@
 - 展示样例如下图所示：
   
 
-[![xNHIGn.png](https://s1.ax1x.com/2022/10/11/xNHIGn.png)](https://imgse.com/i/xNHIGn)
+[![xroRzQ.md.png](https://s1.ax1x.com/2022/10/18/xroRzQ.md.png)](https://imgse.com/i/xroRzQ)
 
 - 推荐使用 [Python Django](https://www.djangoproject.com/) 库来实现
 
