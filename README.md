@@ -165,7 +165,7 @@
 
   其中，队长负责创建队伍，其余队员加入已有队伍即可。注意，队名只能是英文名
 
-- 最终所有仓库都会建立在[BITCS-Information-Retrieval-2022-2023](https://github.com/BITCS-Information-Retrieval-2022)这个GitHub Organization账号下
+- 最终所有仓库都会建立在[BITCS-Information-Retrieval-2022](https://github.com/BITCS-Information-Retrieval-2022)这个GitHub Organization账号下
 
 # 验收
 
