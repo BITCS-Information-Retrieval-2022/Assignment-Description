@@ -174,7 +174,7 @@
 |    1     | Project1 |      InfoRetrieval-DataAgent      | 王朝阳 |        汪俊凯，喻晨曦，吕卓澄，崔文耀，林泽炜        | 8:00-8:20  |
 |    2     | Project1 |       Mountains-and-Seas          |  叶语霄  |  张庚辰，梁瑛平，罗潘亚欣，张驰，魏慧聪  | 8:30-8:55   |
 |    9     | Project1 |       IR_ReptiliaCrawler          | 于翔 |     赵曰皓，郭思涵，闫羽，彭炜，刘昕飏     | 9:00-9:25   |
-|    12     | Project1 |  |  罗泽宇  |       刘奕凡，吕非浓，耿明灏       | 9:30-9:55 |
+|    12     | Project1 | inforetrieval |  罗泽宇  |       刘奕凡，吕非浓，耿明灏       | 9:30-9:55 |
 |    5     | Project2 |       bitwosix           | 牟效仑 |     方胜，刘彬，刘正清，杨东东，杨芊雨     | 10:00-10:25 |
 |    8    | Project2 |       BitEight      | 任博文 |      王逸洲，缪思语，武益霄，李曼秋，崔文毓      | 10:30-10:55 |
 |    10    | Project2 |      SiegeLion     | 王恒烨 |      王嘉宁，周旭鸿，邹怡清，李鸿熙，宁艺凯      | 11:00-11:25 |
